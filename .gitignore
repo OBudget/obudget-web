@@ -1,3 +1,7 @@
+# Project related settings
+build/
+.vscode/
+
 # Logs
 logs
 *.log
