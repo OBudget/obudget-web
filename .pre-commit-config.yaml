@@ -12,11 +12,11 @@ repos:
       - id: trailing-whitespace
 
   - repo: https://github.com/pre-commit/mirrors-eslint
-    rev: v7.14.0
+    rev: v8.6.0
     hooks:
       - id: eslint
         additional_dependencies:
-          - eslint@7.14.0
+          - eslint@8.6.0
           - eslint-config-airbnb
           - eslint-config-airbnb-typescript
           - eslint-config-prettier

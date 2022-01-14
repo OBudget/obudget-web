@@ -1,6 +1,7 @@
 # Project related settings
 build/
 .vscode/
+env.js
 
 # Logs
 logs
