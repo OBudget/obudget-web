@@ -1,6 +1,5 @@
 import axios from "axios";
 import { makeAutoObservable, action } from "mobx";
-import env from "react-dotenv";
 
 import { Category, Event, FetchStatus } from "src/types";
 
@@ -18,7 +17,7 @@ export default class EventsList {
 
   fetch(): void {
     axios
-      .get(`${env.API_URL}/events/`)
+      .get(`${process.env.REACT_APP_API_URL}/events/`)
       .then(
         action("fetchEventsSucceeded", (response) => {
           this.events = response.data;

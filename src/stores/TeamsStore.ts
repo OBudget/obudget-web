@@ -1,6 +1,5 @@
 import axios from "axios";
 import { makeAutoObservable, action } from "mobx";
-import env from "react-dotenv";
 
 import { Event, Team, FetchStatus } from "src/types";
 
@@ -24,7 +23,7 @@ export default class TeamsStore {
 
     if (this.eventId) {
       axios
-        .get(`${env.API_URL}/teams/?event=${this.eventId}`)
+        .get(`${process.env.REACT_APP_API_URL}/teams/?event=${this.eventId}`)
         .then(
           action("fetchTeamsSucceeded", (response) => {
             this.teams = response.data;
@@ -44,7 +43,10 @@ export default class TeamsStore {
 
   async add(team: Team): Promise<any> {
     try {
-      const response = await axios.post(`${env.API_URL}/teams/`, team);
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_URL}/teams/`,
+        team
+      );
 
       this.fetch();
 
@@ -56,7 +58,9 @@ export default class TeamsStore {
 
   async delete(team: Team): Promise<any> {
     try {
-      const response = await axios.delete(`${env.API_URL}/teams/${team._id}`);
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_URL}/teams/${team._id}`
+      );
 
       this.fetch();
 
@@ -69,7 +73,7 @@ export default class TeamsStore {
   async update(team: Team, values: any): Promise<any> {
     try {
       const response = await axios.patch(
-        `${env.API_URL}/teams/${team._id}`,
+        `${process.env.REACT_APP_API_URL}/teams/${team._id}`,
         values
       );
 

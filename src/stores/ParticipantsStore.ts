@@ -1,6 +1,5 @@
 import axios from "axios";
 import { makeAutoObservable, action } from "mobx";
-import env from "react-dotenv";
 
 import { Participant, FetchStatus } from "src/types";
 
@@ -18,7 +17,7 @@ export default class ParticipantsStore {
     this.state = FetchStatus.Pending;
 
     axios
-      .get(`${env.API_URL}/participants/`)
+      .get(`${process.env.REACT_APP_API_URL}/participants/`)
       .then(
         action("fetchParticipantsSucceeded", (response) => {
           this.participants = response.data;
@@ -36,7 +35,7 @@ export default class ParticipantsStore {
   async add(participant: Participant): Promise<any> {
     try {
       const response = await axios.post(
-        `${env.API_URL}/participants/`,
+        `${process.env.REACT_APP_API_URL}/participants/`,
         participant
       );
 
@@ -51,7 +50,7 @@ export default class ParticipantsStore {
   async delete(participant: Participant): Promise<any> {
     try {
       const response = await axios.delete(
-        `${env.API_URL}/participants/${participant._id}`
+        `${process.env.REACT_APP_API_URL}/participants/${participant._id}`
       );
 
       this.fetch();
@@ -65,7 +64,7 @@ export default class ParticipantsStore {
   async update(participant: Participant, values: any): Promise<any> {
     try {
       const response = await axios.patch(
-        `${env.API_URL}/participants/${participant._id}`,
+        `${process.env.REACT_APP_API_URL}/participants/${participant._id}`,
         values
       );
 
