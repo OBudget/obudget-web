@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { makeStyles } from "@material-ui/core";
 
@@ -40,8 +40,11 @@ const DashboardLayout = observer(
   ({ events }: { events: EventsStore }): JSX.Element => {
     const classes = useStyles();
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
+    const location = useLocation();
 
-    return (
+    const isLoggedIn = false;
+
+    return isLoggedIn ? (
       <div className={classes.root}>
         <TopBar
           events={events}
@@ -59,6 +62,8 @@ const DashboardLayout = observer(
           </div>
         </div>
       </div>
+    ) : (
+      <Navigate to="/login" state={{ from: location }} replace />
     );
   }
 );

@@ -19,31 +19,31 @@ import {
 import NavItem from "./NavItem";
 
 const user = {
-  avatar: "/static/images/avatars/avatar_6.png",
-  jobTitle: "Администратор",
-  name: "Мария Петрова",
+  avatar: "/static/images/avatars/avatar_4.png",
+  jobTitle: "Administrator",
+  name: "John Doe",
 };
 
 const items = [
   {
     href: "/app/dashboard",
     icon: BarChartIcon,
-    title: "Дашборд",
+    title: "Dashboard",
   },
   {
     href: "/app/participants",
     icon: UserIcon,
-    title: "Участники",
+    title: "Users",
   },
   {
     href: "/app/teams",
     icon: UsersIcon,
-    title: "Команды",
+    title: "Teams",
   },
   {
     href: "/app/settings",
     icon: SettingsIcon,
-    title: "Настройки",
+    title: "Settings",
   },
 ];
 
