@@ -10,6 +10,9 @@ import RegisterView from "src/views/auth/RegisterView";
 import SettingsView from "src/views/settings/SettingsView";
 import TeamsListView from "src/views/teams/TeamsListView";
 import EventsStore from "src/stores/EventsStore";
+import { UserStore } from "src/stores";
+
+const store = new UserStore();
 
 const eventsStore = new EventsStore();
 
@@ -29,8 +32,8 @@ const routes = [
     path: "/",
     element: <MainLayout />,
     children: [
-      { path: "login", element: <LoginView /> },
-      { path: "register", element: <RegisterView /> },
+      { path: "login", element: <LoginView user={store} /> },
+      { path: "register", element: <RegisterView user={store} /> },
       { path: "404", element: <NotFoundView /> },
       { path: "/", element: <Navigate to="/app/dashboard" /> },
       { path: "*", element: <Navigate to="/404" /> },

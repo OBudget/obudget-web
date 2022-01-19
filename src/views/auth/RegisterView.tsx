@@ -1,4 +1,6 @@
-import { Link as RouterLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { observer } from "mobx-react-lite";
+import { Link as RouterLink } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import {
@@ -8,11 +10,15 @@ import {
   Container,
   FormHelperText,
   Link,
+  Snackbar,
   TextField,
   Typography,
   makeStyles,
 } from "@material-ui/core";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import Page from "src/components/Page";
+import { UserStore } from "src/stores";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,9 +29,50 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RegisterView = () => {
+interface LoginProps {
+  user: UserStore;
+}
+
+interface RegistrationFormProps {
+  values: {
+    name?: string;
+    email: string;
+    password: string;
+  };
+  setSubmitting: (isSubmitting: boolean) => void;
+}
+
+const Alert = (props: any) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
+
+const RegisterView = observer(({ user }: LoginProps) => {
   const classes = useStyles();
-  const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleCloseErrorMessage = () => {
+    setErrorMessage("");
+  };
+
+  const handleCloseSuccessMessage = () => {
+    setSuccessMessage("");
+  };
+
+  const registerUser = ({ values, setSubmitting }: RegistrationFormProps) => {
+    setSubmitting(true);
+    user
+      .signup(values)
+      .then(() => {
+        setSubmitting(false);
+        setSuccessMessage("User has been successfully added!");
+      })
+      .catch((error) => {
+        setSubmitting(false);
+        console.log(error);
+        setErrorMessage("Something went wrong");
+      });
+  };
 
   return (
     <Page className={classes.root} title="Register">
@@ -39,8 +86,7 @@ const RegisterView = () => {
           <Formik
             initialValues={{
               email: "",
-              firstName: "",
-              lastName: "",
+              name: "",
               password: "",
               policy: false,
             }}
@@ -49,16 +95,13 @@ const RegisterView = () => {
                 .email("Must be a valid email")
                 .max(255)
                 .required("Email is required"),
-              firstName: Yup.string()
-                .max(255)
-                .required("First name is required"),
-              lastName: Yup.string().max(255).required("Last name is required"),
+              name: Yup.string().max(255).optional(),
               password: Yup.string().max(255).required("password is required"),
               policy: Yup.boolean().oneOf([true], "This field must be checked"),
             })}
-            onSubmit={() => {
-              navigate("/app/dashboard", { replace: true });
-            }}
+            onSubmit={(values, { setSubmitting }) =>
+              registerUser({ values, setSubmitting })
+            }
           >
             {({
               errors,
@@ -83,27 +126,15 @@ const RegisterView = () => {
                   </Typography>
                 </Box>
                 <TextField
-                  error={Boolean(touched.firstName && errors.firstName)}
+                  error={Boolean(touched.name && errors.name)}
                   fullWidth
-                  helperText={touched.firstName && errors.firstName}
-                  label="First name"
+                  helperText={touched.name && errors.name}
+                  label="Name"
                   margin="normal"
-                  name="firstName"
+                  name="name"
                   onBlur={handleBlur}
                   onChange={handleChange}
-                  value={values.firstName}
-                  variant="outlined"
-                />
-                <TextField
-                  error={Boolean(touched.lastName && errors.lastName)}
-                  fullWidth
-                  helperText={touched.lastName && errors.lastName}
-                  label="Last name"
-                  margin="normal"
-                  name="lastName"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  value={values.lastName}
+                  value={values.name}
                   variant="outlined"
                 />
                 <TextField
@@ -176,9 +207,27 @@ const RegisterView = () => {
             )}
           </Formik>
         </Container>
+        <Snackbar
+          open={errorMessage !== ""}
+          autoHideDuration={6000}
+          onClose={handleCloseErrorMessage}
+        >
+          <Alert onClose={handleCloseErrorMessage} severity="error">
+            {errorMessage}
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={successMessage !== ""}
+          autoHideDuration={6000}
+          onClose={handleCloseSuccessMessage}
+        >
+          <Alert onClose={handleCloseSuccessMessage} severity="success">
+            {successMessage}
+          </Alert>
+        </Snackbar>
       </Box>
     </Page>
   );
-};
+});
 
 export default RegisterView;

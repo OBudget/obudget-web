@@ -1,3 +1,5 @@
+import { useState } from "react";
+import { observer } from "mobx-react-lite";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { Formik } from "formik";
@@ -5,15 +7,16 @@ import {
   Box,
   Button,
   Container,
-  Grid,
   Link,
+  Snackbar,
   TextField,
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import FacebookIcon from "src/icons/Facebook";
-import GoogleIcon from "src/icons/Google";
+import MuiAlert from "@material-ui/lab/Alert";
+
 import Page from "src/components/Page";
+import { UserStore } from "src/stores";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,9 +27,45 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginView = () => {
+interface LoginProps {
+  user: UserStore;
+}
+
+interface LoginFormProps {
+  values: {
+    email: string;
+    password: string;
+  };
+  setSubmitting: (isSubmitting: boolean) => void;
+}
+
+const Alert = (props: any) => {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+};
+
+const LoginView = observer(({ user }: LoginProps) => {
   const classes = useStyles();
   const navigate = useNavigate();
+
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleCloseErrorMessage = () => {
+    setErrorMessage("");
+  };
+
+  const authenticateUser = ({ values, setSubmitting }: LoginFormProps) => {
+    setSubmitting(true);
+    user
+      .login(values)
+      .then(() => {
+        setSubmitting(false);
+        // navigate("/app/dashboard", { replace: true });
+      })
+      .catch(() => {
+        setSubmitting(false);
+        setErrorMessage("Login failed! Try different username/password.");
+      });
+  };
 
   return (
     <Page className={classes.root} title="Login">
@@ -39,8 +78,8 @@ const LoginView = () => {
         <Container maxWidth="sm">
           <Formik
             initialValues={{
-              email: "demo@devias.io",
-              password: "Password123",
+              email: "",
+              password: "",
             }}
             validationSchema={Yup.object().shape({
               email: Yup.string()
@@ -49,9 +88,9 @@ const LoginView = () => {
                 .required("Email is required"),
               password: Yup.string().max(255).required("Password is required"),
             })}
-            onSubmit={() => {
-              navigate("/app/dashboard", { replace: true });
-            }}
+            onSubmit={(values, { setSubmitting }) =>
+              authenticateUser({ values, setSubmitting })
+            }
           >
             {({
               errors,
@@ -73,38 +112,6 @@ const LoginView = () => {
                     variant="body2"
                   >
                     Sign in on the internal platform
-                  </Typography>
-                </Box>
-                <Grid container spacing={3}>
-                  <Grid item xs={12} md={6}>
-                    <Button
-                      color="primary"
-                      fullWidth
-                      startIcon={<FacebookIcon />}
-                      size="large"
-                      variant="contained"
-                    >
-                      Login with Facebook
-                    </Button>
-                  </Grid>
-                  <Grid item xs={12} md={6}>
-                    <Button
-                      fullWidth
-                      startIcon={<GoogleIcon />}
-                      size="large"
-                      variant="contained"
-                    >
-                      Login with Google
-                    </Button>
-                  </Grid>
-                </Grid>
-                <Box mt={3} mb={1}>
-                  <Typography
-                    align="center"
-                    color="textSecondary"
-                    variant="body1"
-                  >
-                    or login with email address
                   </Typography>
                 </Box>
                 <TextField
@@ -155,9 +162,18 @@ const LoginView = () => {
             )}
           </Formik>
         </Container>
+        <Snackbar
+          open={errorMessage !== ""}
+          autoHideDuration={6000}
+          onClose={handleCloseErrorMessage}
+        >
+          <Alert onClose={handleCloseErrorMessage} severity="error">
+            {errorMessage}
+          </Alert>
+        </Snackbar>
       </Box>
     </Page>
   );
-};
+});
 
 export default LoginView;
