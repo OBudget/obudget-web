@@ -12,9 +12,10 @@ import {
 } from "@material-ui/core";
 import {
   BarChart as BarChartIcon,
+  CreditCard as AccountsIcon,
+  DollarSign as BudgetIcon,
+  FileText as TransactionsIcon,
   Settings as SettingsIcon,
-  User as UserIcon,
-  Users as UsersIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
 
@@ -32,13 +33,18 @@ const items = [
   },
   {
     href: "/app/participants",
-    icon: UserIcon,
-    title: "Users",
+    icon: BudgetIcon,
+    title: "Budget",
   },
   {
     href: "/app/teams",
-    icon: UsersIcon,
-    title: "Teams",
+    icon: TransactionsIcon,
+    title: "Transactions",
+  },
+  {
+    href: "/app/teams",
+    icon: AccountsIcon,
+    title: "Accounts",
   },
   {
     href: "/app/settings",

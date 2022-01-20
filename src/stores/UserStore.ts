@@ -49,12 +49,11 @@ export default class UserStore {
       }
       const saltedPass = hashPassword(values.password, salt);
 
-      const authData = {
-        grant_type: "password",
-        username: values.email,
-        password: saltedPass,
-        client_id: process.env.REACT_APP_CLIENT_ID,
-      };
+      const authData = new URLSearchParams();
+      authData.append("grant_type", "password");
+      authData.append("username", values.email);
+      authData.append("password", saltedPass);
+      authData.append("client_id", process.env.REACT_APP_CLIENT_ID || "");
 
       const token = await axios.post(
         `${process.env.REACT_APP_API_URL}/auth/token/`,
@@ -62,12 +61,10 @@ export default class UserStore {
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
 
-      console.log(token);
-
-      // this.accessToken = token.access_token;
-      // this.tokenExpiresIn = token.expires_in;
-      // this.refreshToken = token.refresh_token;
-      // this.authenticated = true;
+      this.accessToken = token.data.access_token;
+      this.tokenExpiresIn = token.data.expires_in;
+      this.refreshToken = token.data.refresh_token;
+      this.authenticated = true;
 
       this.state = FetchStatus.Done;
       return await Promise.resolve({});
@@ -87,15 +84,16 @@ export default class UserStore {
       }
       const saltedPass = hashPassword(values.password, salt);
 
-      const user: RegistrationFormProps = {
-        name: values.name,
-        email: values.email,
-        password: saltedPass,
-      };
+      const formData = new URLSearchParams();
+      if (values.name) {
+        formData.append("name", values.name);
+      }
+      formData.append("email", values.email);
+      formData.append("password", saltedPass);
 
       const response = await axios.post(
         `${process.env.REACT_APP_API_URL}/users/`,
-        user,
+        formData,
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
 

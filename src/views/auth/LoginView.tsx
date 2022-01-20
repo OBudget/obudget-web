@@ -59,7 +59,7 @@ const LoginView = observer(({ user }: LoginProps) => {
       .login(values)
       .then(() => {
         setSubmitting(false);
-        // navigate("/app/dashboard", { replace: true });
+        navigate("/app/dashboard", { replace: true });
       })
       .catch(() => {
         setSubmitting(false);

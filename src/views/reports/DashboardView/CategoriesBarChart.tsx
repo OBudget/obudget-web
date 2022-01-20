@@ -25,16 +25,16 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
     datasets: [
       {
         backgroundColor: colors.indigo[500],
-        data: [18, 29, 19, 27, 19, 5, 20],
-        label: "Зарегистрировалось",
+        data: [3015, 2900, 3000, 3500, 1900, 500, 2000],
+        label: "Income, $",
       },
       {
         backgroundColor: colors.grey[200],
-        data: [11, 25, 12, 15, 15, 4, 19],
-        label: "Финишировало",
+        data: [1100, 2500, 1200, 1500, 1500, 400, 1900],
+        label: "Spent, $",
       },
     ],
-    labels: ["Ч", "С", "ДВ", "В", "Л", "ВЛ", "Б"],
+    labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"],
   };
 
   const options = {
@@ -100,7 +100,7 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
         //     Last 7 days
         //   </Button>
         // }
-        title="Участники в категориях"
+        title="Income vs Spending"
       />
       <Divider />
       <CardContent>

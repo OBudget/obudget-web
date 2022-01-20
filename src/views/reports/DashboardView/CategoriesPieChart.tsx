@@ -39,7 +39,15 @@ const CategoriesPieChart = ({ className, ...rest }: { className?: string }) => {
         hoverBorderColor: colors.common.white,
       },
     ],
-    labels: ["С", "ДВ", "Ч", "Л", "ВЛ", "Б", "В"],
+    labels: [
+      "Rent",
+      "Food",
+      "Car",
+      "Utilities",
+      "Vacation",
+      "Fun Money",
+      "Other",
+    ],
   };
 
   const options = {
@@ -66,7 +74,7 @@ const CategoriesPieChart = ({ className, ...rest }: { className?: string }) => {
 
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
-      <CardHeader title="Категории" />
+      <CardHeader title="Categories" />
       <Divider />
       <CardContent>
         <Box height={300} position="relative">

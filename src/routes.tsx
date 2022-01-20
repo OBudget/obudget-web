@@ -19,7 +19,7 @@ const eventsStore = new EventsStore();
 const routes = [
   {
     path: "app",
-    element: <DashboardLayout events={eventsStore} />,
+    element: <DashboardLayout user={store} events={eventsStore} />,
     children: [
       { path: "dashboard", element: <DashboardView /> },
       { path: "participants", element: <ParticipantsListView /> },

@@ -10,7 +10,7 @@ import {
   makeStyles,
 } from "@material-ui/core";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import DirectionsRunIcon from "@material-ui/icons/DirectionsRun";
+import BeachAccessIcon from "@material-ui/icons/BeachAccess";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,25 +39,25 @@ const TotalParticipants = ({ className, ...rest }: { className?: string }) => {
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              УЧАСТНИКОВ
+              DAYS OF BUFFER
             </Typography>
             <Typography color="textPrimary" variant="h3">
-              579
+              178
             </Typography>
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <DirectionsRunIcon />
+              <BeachAccessIcon />
             </Avatar>
           </Grid>
         </Grid>
         <Box mt={2} display="flex" alignItems="center">
           <ArrowUpwardIcon className={classes.differenceIcon} />
           <Typography className={classes.differenceValue} variant="body2">
-            16%
+            9%
           </Typography>
           <Typography color="textSecondary" variant="caption">
-            С прошлого крока
+            From last month
           </Typography>
         </Box>
       </CardContent>

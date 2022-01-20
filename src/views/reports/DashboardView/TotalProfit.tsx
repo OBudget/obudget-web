@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import {
   Avatar,
+  Box,
   Card,
   CardContent,
   Grid,
@@ -9,8 +10,9 @@ import {
   colors,
 } from "@material-ui/core";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
+import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     height: "100%",
   },
@@ -18,6 +20,13 @@ const useStyles = makeStyles(() => ({
     backgroundColor: colors.indigo[600],
     height: 56,
     width: 56,
+  },
+  differenceIcon: {
+    color: colors.green[900],
+  },
+  differenceValue: {
+    color: colors.green[900],
+    marginRight: theme.spacing(1),
   },
 }));
 
@@ -30,10 +39,10 @@ const TotalProfit = ({ className, ...rest }: { className?: string }) => {
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              ПРИБЫЛЬ
+              NET WORTH
             </Typography>
             <Typography color="textPrimary" variant="h3">
-              ₽157,200
+              $157,200
             </Typography>
           </Grid>
           <Grid item>
@@ -42,6 +51,15 @@ const TotalProfit = ({ className, ...rest }: { className?: string }) => {
             </Avatar>
           </Grid>
         </Grid>
+        <Box mt={2} display="flex" alignItems="center">
+          <ArrowUpwardIcon className={classes.differenceIcon} />
+          <Typography className={classes.differenceValue} variant="body2">
+            15%
+          </Typography>
+          <Typography color="textSecondary" variant="caption">
+            From last month
+          </Typography>
+        </Box>
       </CardContent>
     </Card>
   );

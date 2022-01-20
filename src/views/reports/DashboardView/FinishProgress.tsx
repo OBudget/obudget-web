@@ -10,7 +10,7 @@ import {
   makeStyles,
   colors,
 } from "@material-ui/core";
-import TimerIcon from "@material-ui/icons/Timer";
+import TrackChangesIcon from "@material-ui/icons/TrackChanges";
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -32,7 +32,7 @@ const FinishProgress = ({ className, ...rest }: { className?: string }) => {
         <Grid container justify="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
-              ФИНИШ
+              BUDGETED
             </Typography>
             <Typography color="textPrimary" variant="h3">
               75.5%
@@ -40,7 +40,7 @@ const FinishProgress = ({ className, ...rest }: { className?: string }) => {
           </Grid>
           <Grid item>
             <Avatar className={classes.avatar}>
-              <TimerIcon />
+              <TrackChangesIcon />
             </Avatar>
           </Grid>
         </Grid>

@@ -7,7 +7,6 @@ import LatestOrders from "./LatestOrders";
 import LatestProducts from "./LatestProducts";
 import TotalParticipants from "./TotalParticipants";
 import TotalProfit from "./TotalProfit";
-import TotalTeams from "./TotalTeams";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,16 +24,13 @@ const Dashboard = () => {
     <Page className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
         <Grid container spacing={3}>
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
+          <Grid item lg={4} sm={6} xl={4} xs={12}>
             <TotalParticipants />
           </Grid>
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
-            <TotalTeams />
-          </Grid>
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
+          <Grid item lg={4} sm={6} xl={4} xs={12}>
             <FinishProgress />
           </Grid>
-          <Grid item lg={3} sm={6} xl={3} xs={12}>
+          <Grid item lg={4} sm={6} xl={4} xs={12}>
             <TotalProfit />
           </Grid>
           <Grid item lg={8} md={12} xl={9} xs={12}>
