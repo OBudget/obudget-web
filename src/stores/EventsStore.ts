@@ -16,21 +16,22 @@ export default class EventsList {
   }
 
   fetch(): void {
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/events/`)
-      .then(
-        action("fetchEventsSucceeded", (response) => {
-          this.events = response.data;
-          this.state = FetchStatus.Done;
-          this.currentIndex = this.events.length - 1;
-        })
-      )
-      .catch(
-        action("fetchEventsFailed", (error) => {
-          this.state = FetchStatus.Error;
-          console.log(error);
-        })
-      );
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/events/`)
+    //   .then(
+    //     action("fetchEventsSucceeded", (response) => {
+    //       this.events = response.data;
+    //       this.state = FetchStatus.Done;
+    //       this.currentIndex = this.events.length - 1;
+    //     })
+    //   )
+    //   .catch(
+    //     action("fetchEventsFailed", (error) => {
+    //       this.state = FetchStatus.Error;
+    //       console.log(error);
+    //     })
+    //   );
+    this.state = FetchStatus.Done;
   }
 
   isPending(): boolean {

@@ -16,20 +16,22 @@ export default class ParticipantsStore {
   fetch(): void {
     this.state = FetchStatus.Pending;
 
-    axios
-      .get(`${process.env.REACT_APP_API_URL}/participants/`)
-      .then(
-        action("fetchParticipantsSucceeded", (response) => {
-          this.participants = response.data;
-          this.state = FetchStatus.Done;
-        })
-      )
-      .catch(
-        action("fetchParticipantsFailed", (error) => {
-          this.state = FetchStatus.Error;
-          console.log(error);
-        })
-      );
+    // axios
+    //   .get(`${process.env.REACT_APP_API_URL}/participants/`)
+    //   .then(
+    //     action("fetchParticipantsSucceeded", (response) => {
+    //       this.participants = response.data;
+    //       this.state = FetchStatus.Done;
+    //     })
+    //   )
+    //   .catch(
+    //     action("fetchParticipantsFailed", (error) => {
+    //       this.state = FetchStatus.Error;
+    //       console.log(error);
+    //     })
+    //   );
+
+    this.state = FetchStatus.Done;
   }
 
   async add(participant: Participant): Promise<any> {

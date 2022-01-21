@@ -29,14 +29,33 @@ export default class UserStore {
 
   authenticated = false;
 
-  accessToken: string | undefined = undefined;
+  accessToken: string | null = null;
 
-  refreshToken: string | undefined = undefined;
+  refreshToken: string | null = null;
 
-  tokenExpiresIn: string | undefined = undefined;
+  tokenExpiresIn: string | null = null;
 
   constructor() {
+    this.restoreSessionFromLocalStorage();
     makeAutoObservable(this);
+  }
+
+  restoreSessionFromLocalStorage() {
+    if (localStorage.getItem("accessToken")) {
+      this.accessToken = localStorage.getItem("accessToken");
+    }
+
+    if (localStorage.getItem("refreshToken")) {
+      this.refreshToken = localStorage.getItem("refreshToken");
+    }
+
+    if (localStorage.getItem("tokenExpiresIn")) {
+      this.tokenExpiresIn = localStorage.getItem("tokenExpiresIn");
+    }
+
+    this.authenticated = Boolean(
+      this.accessToken && this.refreshToken && this.tokenExpiresIn
+    );
   }
 
   async login(values: LoginFormProps): Promise<any> {
@@ -61,10 +80,10 @@ export default class UserStore {
         { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
       );
 
-      this.accessToken = token.data.access_token;
-      this.tokenExpiresIn = token.data.expires_in;
-      this.refreshToken = token.data.refresh_token;
-      this.authenticated = true;
+      localStorage.setItem("accessToken", token.data.access_token);
+      localStorage.setItem("refreshToken", token.data.refresh_token);
+      localStorage.setItem("tokenExpiresIn", token.data.expires_in);
+      this.restoreSessionFromLocalStorage();
 
       this.state = FetchStatus.Done;
       return await Promise.resolve({});
