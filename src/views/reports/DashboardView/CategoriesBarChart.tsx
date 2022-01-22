@@ -27,11 +27,19 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
         backgroundColor: colors.indigo[500],
         data: [3015, 2900, 3000, 3500, 1900, 500, 2000],
         label: "Income, $",
+        barThickness: 12,
+        maxBarThickness: 10,
+        barPercentage: 0.5,
+        categoryPercentage: 0.5,
       },
       {
         backgroundColor: colors.grey[200],
         data: [1100, 2500, 1200, 1500, 1500, 400, 1900],
         label: "Spent, $",
+        barThickness: 12,
+        maxBarThickness: 10,
+        barPercentage: 0.5,
+        categoryPercentage: 0.5,
       },
     ],
     labels: ["Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Jan"],
@@ -47,10 +55,6 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
     scales: {
       xAxes: [
         {
-          barThickness: 12,
-          maxBarThickness: 10,
-          barPercentage: 0.5,
-          categoryPercentage: 0.5,
           ticks: {
             fontColor: theme.palette.text.secondary,
           },
