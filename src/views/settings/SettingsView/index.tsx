@@ -1,5 +1,6 @@
 import { Box, Container, makeStyles } from "@material-ui/core";
 import Page from "src/components/Page";
+import DataImport from "./DataImport";
 import Notifications from "./Notifications";
 import Password from "./Password";
 
@@ -21,6 +22,9 @@ const SettingsView = () => {
         <Notifications />
         <Box mt={3}>
           <Password />
+        </Box>
+        <Box mt={3}>
+          <DataImport />
         </Box>
       </Container>
     </Page>
