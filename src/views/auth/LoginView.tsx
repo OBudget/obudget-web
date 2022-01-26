@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { observer } from "mobx-react-lite";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
@@ -13,7 +13,7 @@ import {
   Typography,
   makeStyles,
 } from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
+import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
 
 import Page from "src/components/Page";
 import { UserStore } from "src/stores";
@@ -39,9 +39,12 @@ interface LoginFormProps {
   setSubmitting: (isSubmitting: boolean) => void;
 }
 
-const Alert = (props: any) => {
-  return <MuiAlert elevation={6} variant="filled" {...props} />;
-};
+const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 const LoginView = observer(({ user }: LoginProps) => {
   const classes = useStyles();
@@ -49,7 +52,14 @@ const LoginView = observer(({ user }: LoginProps) => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  const handleCloseErrorMessage = () => {
+  const handleCloseErrorMessage = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
     setErrorMessage("");
   };
 

@@ -32,17 +32,17 @@ const items = [
     title: "Dashboard",
   },
   {
-    href: "/app/participants",
+    href: "/app/budget",
     icon: BudgetIcon,
     title: "Budget",
   },
   {
-    href: "/app/teams",
+    href: "/app/budget",
     icon: TransactionsIcon,
     title: "Transactions",
   },
   {
-    href: "/app/teams",
+    href: "/app/budget",
     icon: AccountsIcon,
     title: "Accounts",
   },

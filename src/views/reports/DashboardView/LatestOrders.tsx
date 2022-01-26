@@ -1,7 +1,6 @@
 import { useState } from "react";
 import clsx from "clsx";
 import moment from "moment";
-import PerfectScrollbar from "react-perfect-scrollbar";
 import {
   Box,
   Button,
@@ -98,40 +97,38 @@ const LatestOrders = ({ className, ...rest }: { className?: string }) => {
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Latest Orders" />
       <Divider />
-      <PerfectScrollbar>
-        <Box minWidth={800}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell>Order Ref</TableCell>
-                <TableCell>Customer</TableCell>
-                <TableCell sortDirection="desc">
-                  <Tooltip enterDelay={300} title="Sort">
-                    <TableSortLabel active direction="desc">
-                      Date
-                    </TableSortLabel>
-                  </Tooltip>
+      <Box>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>Order Ref</TableCell>
+              <TableCell>Customer</TableCell>
+              <TableCell sortDirection="desc">
+                <Tooltip enterDelay={300} title="Sort">
+                  <TableSortLabel active direction="desc">
+                    Date
+                  </TableSortLabel>
+                </Tooltip>
+              </TableCell>
+              <TableCell>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {orders.map((order) => (
+              <TableRow hover key={order.id}>
+                <TableCell>{order.ref}</TableCell>
+                <TableCell>{order.customer.name}</TableCell>
+                <TableCell>
+                  {moment(order.createdAt).format("DD/MM/YYYY")}
                 </TableCell>
-                <TableCell>Status</TableCell>
+                <TableCell>
+                  <Chip color="primary" label={order.status} size="small" />
+                </TableCell>
               </TableRow>
-            </TableHead>
-            <TableBody>
-              {orders.map((order) => (
-                <TableRow hover key={order.id}>
-                  <TableCell>{order.ref}</TableCell>
-                  <TableCell>{order.customer.name}</TableCell>
-                  <TableCell>
-                    {moment(order.createdAt).format("DD/MM/YYYY")}
-                  </TableCell>
-                  <TableCell>
-                    <Chip color="primary" label={order.status} size="small" />
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </Box>
-      </PerfectScrollbar>
+            ))}
+          </TableBody>
+        </Table>
+      </Box>
       <Box display="flex" justifyContent="flex-end" p={2}>
         <Button
           color="primary"

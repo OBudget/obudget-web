@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import clsx from "clsx";
 import {
@@ -17,11 +17,9 @@ import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
 import InputIcon from "@material-ui/icons/Input";
 import Logo from "src/components/Logo";
 import ButtonGroup from "@material-ui/core/ButtonGroup";
-import NavigateBeforeIcon from "@material-ui/icons/NavigateBefore";
-import NavigateNextIcon from "@material-ui/icons/NavigateNext";
 import { green } from "@material-ui/core/colors";
 
-import EventsStore from "src/stores/EventsStore";
+import { UserStore } from "src/stores";
 
 const useStyles = makeStyles(() => ({
   root: {},
@@ -37,20 +35,20 @@ interface OnMobileOpenCallback {
 
 type TopBarProps = {
   className?: string;
-  events: EventsStore;
+  user: UserStore;
   onMobileNavOpen: OnMobileOpenCallback;
 };
 
 const TopBar = observer(
-  ({
-    className,
-    events,
-    onMobileNavOpen,
-    ...rest
-  }: TopBarProps): JSX.Element => {
-    const { currentEvent } = events;
+  ({ className, user, onMobileNavOpen, ...rest }: TopBarProps): JSX.Element => {
     const classes = useStyles();
     const [notifications] = useState([]);
+    const navigate = useNavigate();
+
+    const logout = () => {
+      user.logout();
+      navigate("/login", { replace: true });
+    };
 
     return (
       <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
@@ -64,29 +62,7 @@ const TopBar = observer(
             size="large"
             aria-label="Navigation buttons group"
           >
-            {events.previousEvent && (
-              <Button
-                onClick={() => {
-                  events.switchToPrevious();
-                }}
-              >
-                <NavigateBeforeIcon style={{ color: green[50] }} />
-              </Button>
-            )}
-
-            <Button style={{ color: green[50] }}>
-              {currentEvent ? currentEvent.name : ""}
-            </Button>
-
-            {events.nextEvent && (
-              <Button
-                onClick={() => {
-                  events.switchToNext();
-                }}
-              >
-                <NavigateNextIcon style={{ color: green[50] }} />
-              </Button>
-            )}
+            <Button style={{ color: green[50] }}>OBudget</Button>
           </ButtonGroup>
           <Box flexGrow={1} />
 
@@ -100,7 +76,7 @@ const TopBar = observer(
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit">
+            <IconButton color="inherit" onClick={logout}>
               <InputIcon />
             </IconButton>
           </Hidden>

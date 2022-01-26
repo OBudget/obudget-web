@@ -8,22 +8,17 @@ import LoginView from "src/views/auth/LoginView";
 import NotFoundView from "src/views/errors/NotFoundView";
 import RegisterView from "src/views/auth/RegisterView";
 import SettingsView from "src/views/settings/SettingsView";
-import TeamsListView from "src/views/teams/TeamsListView";
-import EventsStore from "src/stores/EventsStore";
 import { UserStore } from "src/stores";
 
 const store = new UserStore();
 
-const eventsStore = new EventsStore();
-
 const routes = [
   {
     path: "app",
-    element: <DashboardLayout user={store} events={eventsStore} />,
+    element: <DashboardLayout user={store} />,
     children: [
       { path: "dashboard", element: <DashboardView /> },
-      { path: "participants", element: <ParticipantsListView /> },
-      { path: "teams", element: <TeamsListView events={eventsStore} /> },
+      { path: "budget", element: <ParticipantsListView /> },
       { path: "settings", element: <SettingsView /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],

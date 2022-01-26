@@ -58,6 +58,11 @@ export default class UserStore {
     );
   }
 
+  logout() {
+    localStorage.clear();
+    this.restoreSessionFromLocalStorage();
+  }
+
   async login(values: LoginFormProps): Promise<any> {
     this.state = FetchStatus.Pending;
 

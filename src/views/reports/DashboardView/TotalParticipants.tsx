@@ -36,7 +36,7 @@ const TotalParticipants = ({ className, ...rest }: { className?: string }) => {
   return (
     <Card className={clsx(classes.root, className)} {...rest}>
       <CardContent>
-        <Grid container justify="space-between" spacing={3}>
+        <Grid container justifyContent="space-between" spacing={3}>
           <Grid item>
             <Typography color="textSecondary" gutterBottom variant="h6">
               DAYS OF BUFFER
