@@ -3,7 +3,7 @@ import moment from "moment";
 import { styled } from "@mui/material/styles";
 import { Grid } from "@mui/material";
 import { Field } from "formik";
-import { TextField } from "formik-material-ui";
+import { TextField } from "formik-mui";
 
 import ResourceDialog from "src/views/dialogs/ResourceDialog";
 import ParticipantsStore from "src/stores/ParticipantsStore";

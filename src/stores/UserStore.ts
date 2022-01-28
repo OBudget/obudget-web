@@ -3,6 +3,7 @@ import crypto from "crypto-js";
 import { makeAutoObservable } from "mobx";
 
 import { FetchStatus } from "src/types";
+import { BudgetStore } from "src/stores";
 
 const DEFAULT_PASSWORD_SALT = "Q6?Lv.4S7e$Hh&";
 
@@ -34,6 +35,8 @@ export default class UserStore {
   refreshToken: string | null = null;
 
   tokenExpiresIn: string | null = null;
+
+  budget = new BudgetStore(this);
 
   constructor() {
     this.restoreSessionFromLocalStorage();

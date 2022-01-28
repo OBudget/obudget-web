@@ -1,5 +1,4 @@
-import clsx from "clsx";
-import { styled } from "@mui/material/styles";
+import { observer } from "mobx-react-lite";
 import { Formik, Form, Field } from "formik";
 import {
   Box,
@@ -8,40 +7,31 @@ import {
   CardContent,
   CardHeader,
   Divider,
-  FormControl,
-  InputLabel,
   MenuItem,
   Grid,
 } from "@mui/material";
-import { Select, SimpleFileUpload } from "formik-material-ui";
+import { Select, SimpleFileUpload } from "formik-mui";
 
-const PREFIX = "DataImport";
+import { UserStore } from "src/stores";
 
-const classes = {
-  root: `${PREFIX}-root`,
-  formControl: `${PREFIX}-formControl`,
-};
+interface DataImportProps {
+  user: UserStore;
+  className?: string;
+}
 
-const StyledFormik = styled(Formik)({
-  [`& .${classes.root}`]: {},
-  [`& .${classes.formControl}`]: {
-    minWidth: 120,
-  },
-});
-
-const DataImport = ({ className, ...rest }: { className?: string }) => {
+const DataImport = observer(({ user, className, ...rest }: DataImportProps) => {
   const handleSubmit = (values: any) => {
-    console.log(values.provider);
+    user.budget.import(values);
   };
 
   return (
-    <StyledFormik
-      initialValues={{}}
+    <Formik
+      initialValues={{ provider: "ynab" }}
       onSubmit={(values) => {
         handleSubmit(values);
       }}
     >
-      <Form className={clsx(classes.root, className)} {...rest}>
+      <Form className={className} {...rest}>
         <Card>
           <CardHeader
             subheader="Import budget from your previous provider "
@@ -51,25 +41,18 @@ const DataImport = ({ className, ...rest }: { className?: string }) => {
           <CardContent>
             <Grid container spacing={1}>
               <Grid item xs={12} md={8}>
-                <FormControl
+                <Field
+                  sx={{ minWidth: 120, maxWidth: "100%", width: "100%" }}
+                  component={Select}
                   fullWidth
-                  required
-                  className={classes.formControl}
-                  variant="standard"
+                  name="provider"
+                  label="Import from"
+                  id="select-provider"
                 >
-                  <InputLabel id="select-import-label">Import from</InputLabel>
-                  <Field
-                    component={Select}
-                    name="provider"
-                    labelId="select-import-label"
-                    id="select-import"
-                    defaultValue={0}
-                  >
-                    <MenuItem key="import-ynab" value={0}>
-                      YNAB
-                    </MenuItem>
-                  </Field>
-                </FormControl>
+                  <MenuItem key="import-ynab" value="ynab">
+                    YNAB
+                  </MenuItem>
+                </Field>
               </Grid>
               <Grid item xs={12} md={4}>
                 <Field
@@ -89,8 +72,8 @@ const DataImport = ({ className, ...rest }: { className?: string }) => {
           </Box>
         </Card>
       </Form>
-    </StyledFormik>
+    </Formik>
   );
-};
+});
 
 export default DataImport;

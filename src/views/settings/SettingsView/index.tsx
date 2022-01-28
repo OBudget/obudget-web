@@ -1,6 +1,9 @@
+import { observer } from "mobx-react-lite";
 import { Box, Container } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
 import Page from "src/components/Page";
+import { UserStore } from "src/stores";
 import DataImport from "./DataImport";
 import Notifications from "./Notifications";
 import Password from "./Password";
@@ -20,7 +23,7 @@ const StyledPage = styled(Page)(({ theme }) => ({
   },
 }));
 
-const SettingsView = () => {
+const SettingsView = observer(({ user }: { user: UserStore }) => {
   return (
     <StyledPage className={classes.root} title="Settings">
       <Container maxWidth="lg">
@@ -29,11 +32,11 @@ const SettingsView = () => {
           <Password />
         </Box>
         <Box mt={3}>
-          <DataImport />
+          <DataImport user={user} />
         </Box>
       </Container>
     </StyledPage>
   );
-};
+});
 
 export default SettingsView;

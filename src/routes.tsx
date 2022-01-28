@@ -19,7 +19,7 @@ const routes = [
     children: [
       { path: "dashboard", element: <DashboardView /> },
       { path: "budget", element: <ParticipantsListView /> },
-      { path: "settings", element: <SettingsView /> },
+      { path: "settings", element: <SettingsView user={store} /> },
       { path: "*", element: <Navigate to="/404" /> },
     ],
   },
