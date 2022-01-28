@@ -17,7 +17,7 @@ const classes = {
   content: `${PREFIX}-content`,
 };
 
-const StyledNavigate = styled(Navigate)(({ theme }) => ({
+const Root = styled("div")(({ theme }) => ({
   [`& .${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     display: "flex",
@@ -57,7 +57,7 @@ const DashboardLayout = observer(
     const isLoggedIn = user.authenticated;
 
     return isLoggedIn ? (
-      <div className={classes.root}>
+      <Root className={classes.root}>
         <TopBar user={user} onMobileNavOpen={() => setMobileNavOpen(true)} />
         <NavBar
           onMobileClose={() => setMobileNavOpen(false)}
@@ -70,9 +70,9 @@ const DashboardLayout = observer(
             </div>
           </div>
         </div>
-      </div>
+      </Root>
     ) : (
-      <StyledNavigate to="/login" state={{ from: location }} replace />
+      <Navigate to="/login" state={{ from: location }} replace />
     );
   }
 );
