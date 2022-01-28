@@ -209,7 +209,12 @@ const RegisterView = observer(({ user }: LoginProps) => {
                 </Box>
                 <Typography color="textSecondary" variant="body1">
                   Have an account?{" "}
-                  <Link component={RouterLink} to="/login" variant="h6">
+                  <Link
+                    component={RouterLink}
+                    to="/login"
+                    variant="h6"
+                    underline="hover"
+                  >
                     Sign in
                   </Link>
                 </Typography>

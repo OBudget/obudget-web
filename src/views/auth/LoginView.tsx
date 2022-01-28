@@ -164,7 +164,12 @@ const LoginView = observer(({ user }: LoginProps) => {
                 </Box>
                 <Typography color="textSecondary" variant="body1">
                   Don&apos;t have an account?{" "}
-                  <Link component={RouterLink} to="/register" variant="h6">
+                  <Link
+                    component={RouterLink}
+                    to="/register"
+                    variant="h6"
+                    underline="hover"
+                  >
                     Sign up
                   </Link>
                 </Typography>
