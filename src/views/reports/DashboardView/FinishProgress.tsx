@@ -7,10 +7,10 @@ import {
   Grid,
   LinearProgress,
   Typography,
-  makeStyles,
   colors,
-} from "@material-ui/core";
-import TrackChangesIcon from "@material-ui/icons/TrackChanges";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 
 const useStyles = makeStyles(() => ({
   root: {

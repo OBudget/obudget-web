@@ -7,10 +7,10 @@ import {
   Grid,
   Typography,
   colors,
-  makeStyles,
-} from "@material-ui/core";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
-import BeachAccessIcon from "@material-ui/icons/BeachAccess";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
 const useStyles = makeStyles((theme) => ({
   root: {

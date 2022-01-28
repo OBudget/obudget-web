@@ -1,4 +1,5 @@
-import { Box, Container, makeStyles } from "@material-ui/core";
+import { Box, Container } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import Page from "src/components/Page";
 import DataImport from "./DataImport";
 import Notifications from "./Notifications";

@@ -12,10 +12,10 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  makeStyles,
-} from "@material-ui/core";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const data = [
   {

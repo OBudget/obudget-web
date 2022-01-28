@@ -9,15 +9,15 @@ import {
   Hidden,
   IconButton,
   Toolbar,
-  makeStyles,
   Button,
-} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import NotificationsIcon from "@material-ui/icons/NotificationsOutlined";
-import InputIcon from "@material-ui/icons/Input";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import MenuIcon from "@mui/icons-material/Menu";
+import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
+import InputIcon from "@mui/icons-material/Input";
 import Logo from "src/components/Logo";
-import ButtonGroup from "@material-ui/core/ButtonGroup";
-import { green } from "@material-ui/core/colors";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import { green } from "@mui/material/colors";
 
 import { UserStore } from "src/stores";
 
@@ -66,8 +66,8 @@ const TopBar = observer(
           </ButtonGroup>
           <Box flexGrow={1} />
 
-          <Hidden mdDown>
-            <IconButton color="inherit">
+          <Hidden lgDown>
+            <IconButton color="inherit" size="large">
               <Badge
                 badgeContent={notifications.length}
                 color="primary"
@@ -76,12 +76,12 @@ const TopBar = observer(
                 <NotificationsIcon />
               </Badge>
             </IconButton>
-            <IconButton color="inherit" onClick={logout}>
+            <IconButton color="inherit" onClick={logout} size="large">
               <InputIcon />
             </IconButton>
           </Hidden>
           <Hidden lgUp>
-            <IconButton color="inherit" onClick={onMobileNavOpen}>
+            <IconButton color="inherit" onClick={onMobileNavOpen} size="large">
               <MenuIcon />
             </IconButton>
           </Hidden>

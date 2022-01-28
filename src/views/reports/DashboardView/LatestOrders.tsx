@@ -15,9 +15,9 @@ import {
   TableRow,
   TableSortLabel,
   Tooltip,
-  makeStyles,
-} from "@material-ui/core";
-import ArrowRightIcon from "@material-ui/icons/ArrowRight";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
 const data = [
   {

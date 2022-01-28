@@ -8,8 +8,8 @@ import {
   Hidden,
   List,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import {
   BarChart as BarChartIcon,
   CreditCard as AccountsIcon,
@@ -135,7 +135,7 @@ const NavBar = ({ onMobileClose, openMobile }: NavbarProbs): JSX.Element => {
           {content}
         </Drawer>
       </Hidden>
-      <Hidden mdDown>
+      <Hidden lgDown>
         <Drawer
           anchor="left"
           classes={{ paper: classes.desktopDrawer }}

@@ -10,9 +10,9 @@ import {
   FormControl,
   InputLabel,
   MenuItem,
-  makeStyles,
   Grid,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { Select, SimpleFileUpload } from "formik-material-ui";
 
 const useStyles = makeStyles({

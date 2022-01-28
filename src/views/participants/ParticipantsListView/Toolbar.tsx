@@ -7,8 +7,8 @@ import {
   TextField,
   InputAdornment,
   SvgIcon,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { Search as SearchIcon } from "react-feather";
 
 const useStyles = makeStyles((theme) => ({

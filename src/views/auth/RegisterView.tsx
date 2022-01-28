@@ -13,9 +13,9 @@ import {
   Snackbar,
   TextField,
   Typography,
-  makeStyles,
-} from "@material-ui/core";
-import MuiAlert, { AlertProps } from "@material-ui/lab/Alert";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 import Page from "src/components/Page";
 import { UserStore } from "src/stores";

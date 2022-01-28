@@ -1,4 +1,5 @@
-import { Container, Grid, makeStyles } from "@material-ui/core";
+import { Container, Grid } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import Page from "src/components/Page";
 import CategoriesBarChart from "./CategoriesBarChart";
 import CategoriesPieChart from "./CategoriesPieChart";

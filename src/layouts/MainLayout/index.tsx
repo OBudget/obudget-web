@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { makeStyles } from "@material-ui/core";
+import makeStyles from "@mui/styles/makeStyles";
 import TopBar from "./TopBar";
 
 const useStyles = makeStyles((theme) => ({

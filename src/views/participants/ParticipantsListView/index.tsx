@@ -1,6 +1,8 @@
 import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import { Box, Container, makeStyles } from "@material-ui/core";
+import { Box, Container } from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 import Page from "src/components/Page";
 import ParticipantsStore from "src/stores/ParticipantsStore";

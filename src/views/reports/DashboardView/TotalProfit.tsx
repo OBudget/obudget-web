@@ -6,11 +6,11 @@ import {
   CardContent,
   Grid,
   Typography,
-  makeStyles,
   colors,
-} from "@material-ui/core";
-import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
-import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
+} from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import AccountBalanceWalletIcon from "@mui/icons-material/AccountBalanceWallet";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
 const useStyles = makeStyles((theme) => ({
   root: {

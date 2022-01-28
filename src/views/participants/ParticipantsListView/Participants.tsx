@@ -11,10 +11,11 @@ import {
   TableHead,
   TablePagination,
   TableRow,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
 
-import EditIcon from "@material-ui/icons/Edit";
+import makeStyles from "@mui/styles/makeStyles";
+
+import EditIcon from "@mui/icons-material/Edit";
 
 import { Participant } from "src/types";
 
@@ -79,6 +80,7 @@ const Participants = ({
                     <IconButton
                       aria-label="Edit"
                       onClick={() => onParticipantEdit(participant)}
+                      size="large"
                     >
                       <EditIcon />
                     </IconButton>

@@ -2,8 +2,10 @@ import { observer } from "mobx-react-lite";
 import moment from "moment";
 import { Field } from "formik";
 import { TextField } from "formik-material-ui";
-import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
+import { Theme } from "@mui/material/styles";
+import createStyles from "@mui/styles/createStyles";
+import makeStyles from "@mui/styles/makeStyles";
+import { Grid } from "@mui/material";
 
 import ResourceDialog from "src/views/dialogs/ResourceDialog";
 import ParticipantsStore from "src/stores/ParticipantsStore";

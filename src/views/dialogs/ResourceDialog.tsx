@@ -8,9 +8,9 @@ import {
   DialogContent,
   DialogTitle,
   Snackbar,
-} from "@material-ui/core";
-import MuiAlert from "@material-ui/lab/Alert";
-import { red } from "@material-ui/core/colors";
+} from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { red } from "@mui/material/colors";
 
 interface LocationDialogParameters {
   children: ReactNode;

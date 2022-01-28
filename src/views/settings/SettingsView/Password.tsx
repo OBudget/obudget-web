@@ -8,8 +8,9 @@ import {
   CardHeader,
   Divider,
   TextField,
-  makeStyles,
-} from "@material-ui/core";
+} from "@mui/material";
+
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles({
   root: {},
