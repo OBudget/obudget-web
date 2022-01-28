@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import {
   Avatar,
   Box,
@@ -8,33 +9,42 @@ import {
   Typography,
   colors,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 import BeachAccessIcon from "@mui/icons-material/BeachAccess";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "TotalParticipants";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  avatar: `${PREFIX}-avatar`,
+  differenceIcon: `${PREFIX}-differenceIcon`,
+  differenceValue: `${PREFIX}-differenceValue`,
+};
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     height: "100%",
   },
-  avatar: {
+
+  [`& .${classes.avatar}`]: {
     backgroundColor: colors.green[600],
     height: 56,
     width: 56,
   },
-  differenceIcon: {
+
+  [`& .${classes.differenceIcon}`]: {
     color: colors.green[900],
   },
-  differenceValue: {
+
+  [`& .${classes.differenceValue}`]: {
     color: colors.green[900],
     marginRight: theme.spacing(1),
   },
 }));
 
 const TotalParticipants = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
-
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Grid container justifyContent="space-between" spacing={3}>
           <Grid item>
@@ -61,7 +71,7 @@ const TotalParticipants = ({ className, ...rest }: { className?: string }) => {
           </Typography>
         </Box>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 };
 

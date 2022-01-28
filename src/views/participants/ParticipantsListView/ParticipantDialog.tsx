@@ -1,23 +1,25 @@
 import { observer } from "mobx-react-lite";
 import moment from "moment";
+import { styled } from "@mui/material/styles";
+import { Grid } from "@mui/material";
 import { Field } from "formik";
 import { TextField } from "formik-material-ui";
-import { Theme } from "@mui/material/styles";
-import createStyles from "@mui/styles/createStyles";
-import makeStyles from "@mui/styles/makeStyles";
-import { Grid } from "@mui/material";
 
 import ResourceDialog from "src/views/dialogs/ResourceDialog";
 import ParticipantsStore from "src/stores/ParticipantsStore";
 import { Participant } from "src/types";
 
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    row: {
-      marginTop: theme.spacing(2),
-    },
-  })
-);
+const PREFIX = "ParticipantDialog";
+
+const classes = {
+  row: `${PREFIX}-row`,
+};
+
+const StyledResourceDialog = styled(ResourceDialog)(({ theme }) => ({
+  [`& .${classes.row}`]: {
+    marginTop: theme.spacing(2),
+  },
+}));
 
 interface ParticipantDialogParameters {
   open: boolean;
@@ -34,7 +36,6 @@ const ParticipantDialog = observer(
     participant,
   }: ParticipantDialogParameters): JSX.Element => {
     const dateFormat = "DD/MM/YYYY";
-    const classes = useStyles();
 
     const transformFormValues = (values: any) => {
       const birthday: string = moment(
@@ -60,7 +61,7 @@ const ParticipantDialog = observer(
     };
 
     return (
-      <ResourceDialog
+      <StyledResourceDialog
         title={`${participant ? "Изменить" : "Добавить"} участника`}
         open={open}
         onClose={onClose}
@@ -170,7 +171,7 @@ const ParticipantDialog = observer(
             </Grid>
           </Grid>
         </Grid>
-      </ResourceDialog>
+      </StyledResourceDialog>
     );
   }
 );

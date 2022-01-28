@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { styled } from "@mui/material/styles";
 import { observer } from "mobx-react-lite";
 import { Link as RouterLink } from "react-router-dom";
 import * as Yup from "yup";
@@ -14,14 +15,19 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import MuiAlert, { AlertProps } from "@mui/material/Alert";
 
 import Page from "src/components/Page";
 import { UserStore } from "src/stores";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "RegisterView";
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledPage = styled(Page)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     height: "100%",
     paddingBottom: theme.spacing(3),
@@ -50,7 +56,6 @@ const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
 });
 
 const RegisterView = observer(({ user }: LoginProps) => {
-  const classes = useStyles();
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -85,7 +90,7 @@ const RegisterView = observer(({ user }: LoginProps) => {
   };
 
   return (
-    <Page className={classes.root} title="Register">
+    <StyledPage className={classes.root} title="Register">
       <Box
         display="flex"
         flexDirection="column"
@@ -241,7 +246,7 @@ const RegisterView = observer(({ user }: LoginProps) => {
           </Alert>
         </Snackbar>
       </Box>
-    </Page>
+    </StyledPage>
   );
 });
 

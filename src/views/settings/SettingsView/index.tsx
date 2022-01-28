@@ -1,12 +1,18 @@
 import { Box, Container } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { styled } from "@mui/material/styles";
 import Page from "src/components/Page";
 import DataImport from "./DataImport";
 import Notifications from "./Notifications";
 import Password from "./Password";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "SettingsView";
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledPage = styled(Page)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     minHeight: "100%",
     paddingBottom: theme.spacing(3),
@@ -15,10 +21,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SettingsView = () => {
-  const classes = useStyles();
-
   return (
-    <Page className={classes.root} title="Settings">
+    <StyledPage className={classes.root} title="Settings">
       <Container maxWidth="lg">
         <Notifications />
         <Box mt={3}>
@@ -28,7 +32,7 @@ const SettingsView = () => {
           <DataImport />
         </Box>
       </Container>
-    </Page>
+    </StyledPage>
   );
 };
 

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import moment from "moment";
 import {
@@ -13,9 +14,25 @@ import {
   ListItemAvatar,
   ListItemText,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
+const PREFIX = "LatestProducts";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  image: `${PREFIX}-image`,
+};
+
+const StyledCard = styled(Card)({
+  [`&.${classes.root}`]: {
+    height: "100%",
+  },
+  [`& .${classes.image}`]: {
+    height: 48,
+    width: 48,
+  },
+});
 
 const data = [
   {
@@ -50,22 +67,11 @@ const data = [
   },
 ];
 
-const useStyles = makeStyles({
-  root: {
-    height: "100%",
-  },
-  image: {
-    height: 48,
-    width: 48,
-  },
-});
-
 const LatestProducts = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
   const [products] = useState(data);
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         subtitle={`${products.length} in total`}
         title="Latest Products"
@@ -102,7 +108,7 @@ const LatestProducts = ({ className, ...rest }: { className?: string }) => {
           View all
         </Button>
       </Box>
-    </Card>
+    </StyledCard>
   );
 };
 

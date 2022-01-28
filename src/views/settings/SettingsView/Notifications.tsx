@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import {
   Box,
   Button,
@@ -12,21 +13,24 @@ import {
   Typography,
 } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
+const PREFIX = "Notifications";
 
-const useStyles = makeStyles({
-  root: {},
-  item: {
+const classes = {
+  root: `${PREFIX}-root`,
+  item: `${PREFIX}-item`,
+};
+
+const Root = styled("form")({
+  [`&.${classes.root}`]: {},
+  [`& .${classes.item}`]: {
     display: "flex",
     flexDirection: "column",
   },
 });
 
 const Notifications = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
-
   return (
-    <form className={clsx(classes.root, className)} {...rest}>
+    <Root className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader
           subheader="Manage the notifications"
@@ -79,7 +83,7 @@ const Notifications = ({ className, ...rest }: { className?: string }) => {
           </Button>
         </Box>
       </Card>
-    </form>
+    </Root>
   );
 };
 

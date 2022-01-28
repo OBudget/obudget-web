@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import moment from "moment";
 import {
@@ -16,8 +17,22 @@ import {
   TableSortLabel,
   Tooltip,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
+const PREFIX = "LatestOrders";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  actions: `${PREFIX}-actions`,
+};
+
+const StyledCard = styled(Card)(() => ({
+  [`&.${classes.root}`]: {},
+
+  [`& .${classes.actions}`]: {
+    justifyContent: "flex-end",
+  },
+}));
 
 const data = [
   {
@@ -82,19 +97,11 @@ const data = [
   },
 ];
 
-const useStyles = makeStyles(() => ({
-  root: {},
-  actions: {
-    justifyContent: "flex-end",
-  },
-}));
-
 const LatestOrders = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
   const [orders] = useState(data);
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Latest Orders" />
       <Divider />
       <Box>
@@ -139,7 +146,7 @@ const LatestOrders = ({ className, ...rest }: { className?: string }) => {
           View all
         </Button>
       </Box>
-    </Card>
+    </StyledCard>
   );
 };
 

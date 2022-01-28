@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import {
   Box,
   Button,
@@ -8,12 +9,19 @@ import {
   InputAdornment,
   SvgIcon,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { Search as SearchIcon } from "react-feather";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  importButton: {
+const PREFIX = "Toolbar";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  importButton: `${PREFIX}-importButton`,
+};
+
+const Root = styled("div")(({ theme }) => ({
+  [`&.${classes.root}`]: {},
+
+  [`& .${classes.importButton}`]: {
     marginRight: theme.spacing(1),
   },
 }));
@@ -30,14 +38,12 @@ const Toolbar = ({
   onSearchFilterChange,
   ...rest
 }: ToolbarParameters): JSX.Element => {
-  const classes = useStyles();
-
   const onSearchValueChanged = (event: any) => {
     onSearchFilterChange(event.target.value);
   };
 
   return (
-    <div className={clsx(classes.root, className)} {...rest}>
+    <Root className={clsx(classes.root, className)} {...rest}>
       <Box display="flex" justifyContent="flex-end">
         <Button className={classes.importButton}>Импорт</Button>
         <Button
@@ -71,7 +77,7 @@ const Toolbar = ({
           </CardContent>
         </Card>
       </Box>
-    </div>
+    </Root>
   );
 };
 

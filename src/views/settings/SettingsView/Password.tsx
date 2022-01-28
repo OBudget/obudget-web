@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import {
   Box,
@@ -10,14 +11,17 @@ import {
   TextField,
 } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
+const PREFIX = "Password";
 
-const useStyles = makeStyles({
-  root: {},
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const Root = styled("form")({
+  [`&.${classes.root}`]: {},
 });
 
 const Password = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
   const [values, setValues] = useState({
     password: "",
     confirm: "",
@@ -31,7 +35,7 @@ const Password = ({ className, ...rest }: { className?: string }) => {
   };
 
   return (
-    <form className={clsx(classes.root, className)} {...rest}>
+    <Root className={clsx(classes.root, className)} {...rest}>
       <Card>
         <CardHeader subheader="Update password" title="Password" />
         <Divider />
@@ -64,7 +68,7 @@ const Password = ({ className, ...rest }: { className?: string }) => {
           </Button>
         </Box>
       </Card>
-    </form>
+    </Root>
   );
 };
 

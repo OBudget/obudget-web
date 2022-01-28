@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import clsx from "clsx";
@@ -11,7 +12,6 @@ import {
   Toolbar,
   Button,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import MenuIcon from "@mui/icons-material/Menu";
 import NotificationsIcon from "@mui/icons-material/NotificationsOutlined";
 import InputIcon from "@mui/icons-material/Input";
@@ -21,9 +21,17 @@ import { green } from "@mui/material/colors";
 
 import { UserStore } from "src/stores";
 
-const useStyles = makeStyles(() => ({
-  root: {},
-  avatar: {
+const PREFIX = "TopBar";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  avatar: `${PREFIX}-avatar`,
+};
+
+const StyledAppBar = styled(AppBar)(() => ({
+  [`&.${classes.root}`]: {},
+
+  [`& .${classes.avatar}`]: {
     width: 60,
     height: 60,
   },
@@ -41,7 +49,6 @@ type TopBarProps = {
 
 const TopBar = observer(
   ({ className, user, onMobileNavOpen, ...rest }: TopBarProps): JSX.Element => {
-    const classes = useStyles();
     const [notifications] = useState([]);
     const navigate = useNavigate();
 
@@ -51,7 +58,11 @@ const TopBar = observer(
     };
 
     return (
-      <AppBar className={clsx(classes.root, className)} elevation={0} {...rest}>
+      <StyledAppBar
+        className={clsx(classes.root, className)}
+        elevation={0}
+        {...rest}
+      >
         <Toolbar>
           <RouterLink to="/">
             <Logo />
@@ -86,7 +97,7 @@ const TopBar = observer(
             </IconButton>
           </Hidden>
         </Toolbar>
-      </AppBar>
+      </StyledAppBar>
     );
   }
 );

@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { styled } from "@mui/material/styles";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import {
   Avatar,
@@ -9,7 +10,6 @@ import {
   List,
   Typography,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import {
   BarChart as BarChartIcon,
   CreditCard as AccountsIcon,
@@ -18,6 +18,33 @@ import {
   Settings as SettingsIcon,
 } from "react-feather";
 import NavItem from "./NavItem";
+
+const PREFIX = "NavBar";
+
+const classes = {
+  mobileDrawer: `${PREFIX}-mobileDrawer`,
+  desktopDrawer: `${PREFIX}-desktopDrawer`,
+  avatar: `${PREFIX}-avatar`,
+};
+
+// TODO jss-to-styled codemod: The Fragment root was replaced by div. Change the tag if needed.
+const Root = styled("div")(() => ({
+  [`& .${classes.mobileDrawer}`]: {
+    width: 256,
+  },
+
+  [`& .${classes.desktopDrawer}`]: {
+    width: 256,
+    top: 64,
+    height: "calc(100% - 64px)",
+  },
+
+  [`& .${classes.avatar}`]: {
+    cursor: "pointer",
+    width: 64,
+    height: 64,
+  },
+}));
 
 const user = {
   avatar: "/static/images/avatars/avatar_4.png",
@@ -53,22 +80,6 @@ const items = [
   },
 ];
 
-const useStyles = makeStyles(() => ({
-  mobileDrawer: {
-    width: 256,
-  },
-  desktopDrawer: {
-    width: 256,
-    top: 64,
-    height: "calc(100% - 64px)",
-  },
-  avatar: {
-    cursor: "pointer",
-    width: 64,
-    height: 64,
-  },
-}));
-
 interface OnMobileCloseCallback {
   (): void;
 }
@@ -79,7 +90,6 @@ type NavbarProbs = {
 };
 
 const NavBar = ({ onMobileClose, openMobile }: NavbarProbs): JSX.Element => {
-  const classes = useStyles();
   const location = useLocation();
 
   useEffect(() => {
@@ -123,7 +133,7 @@ const NavBar = ({ onMobileClose, openMobile }: NavbarProbs): JSX.Element => {
   );
 
   return (
-    <>
+    <Root>
       <Hidden lgUp>
         <Drawer
           anchor="left"
@@ -145,7 +155,7 @@ const NavBar = ({ onMobileClose, openMobile }: NavbarProbs): JSX.Element => {
           {content}
         </Drawer>
       </Hidden>
-    </>
+    </Root>
   );
 };
 

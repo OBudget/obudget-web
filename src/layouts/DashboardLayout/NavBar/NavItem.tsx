@@ -1,16 +1,26 @@
 import { NavLink as RouterLink } from "react-router-dom";
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import { Button, ListItem } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
+const PREFIX = "NavItem";
 
-const useStyles = makeStyles((theme) => ({
-  item: {
+const classes = {
+  item: `${PREFIX}-item`,
+  button: `${PREFIX}-button`,
+  icon: `${PREFIX}-icon`,
+  title: `${PREFIX}-title`,
+  active: `${PREFIX}-active`,
+};
+
+const StyledListItem = styled(ListItem)(({ theme }) => ({
+  [`&.${classes.item}`]: {
     display: "flex",
     paddingTop: 0,
     paddingBottom: 0,
   },
-  button: {
+
+  [`& .${classes.button}`]: {
     color: theme.palette.text.secondary,
     fontWeight: theme.typography.fontWeightMedium,
     justifyContent: "flex-start",
@@ -19,13 +29,16 @@ const useStyles = makeStyles((theme) => ({
     textTransform: "none",
     width: "100%",
   },
-  icon: {
+
+  [`& .${classes.icon}`]: {
     marginRight: theme.spacing(1),
   },
-  title: {
+
+  [`& .${classes.title}`]: {
     marginRight: "auto",
   },
-  active: {
+
+  [`& .${classes.active}`]: {
     color: theme.palette.primary.main,
     "& $title": {
       fontWeight: theme.typography.fontWeightMedium,
@@ -50,10 +63,8 @@ const NavItem = ({
   title,
   ...rest
 }: NavItemProps): JSX.Element => {
-  const classes = useStyles();
-
   return (
-    <ListItem
+    <StyledListItem
       className={clsx(classes.item, className)}
       disableGutters
       {...rest}
@@ -67,7 +78,7 @@ const NavItem = ({
         {Icon && <Icon className={classes.icon} fontSize="20" />}
         <span className={classes.title}>{title}</span>
       </Button>
-    </ListItem>
+    </StyledListItem>
   );
 };
 

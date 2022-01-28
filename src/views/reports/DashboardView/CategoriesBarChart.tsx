@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import { Bar } from "react-chartjs-2";
 import {
   Box,
@@ -10,15 +11,19 @@ import {
   useTheme,
   colors,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 
-const useStyles = makeStyles(() => ({
-  root: {},
+const PREFIX = "CategoriesBarChart";
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledCard = styled(Card)(() => ({
+  [`&.${classes.root}`]: {},
 }));
 
 const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
   const theme = useTheme();
 
   const data = {
@@ -97,7 +102,7 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
   };
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardHeader
         // action={
         //   <Button endIcon={<ArrowDropDownIcon />} size="small" variant="text">
@@ -123,7 +128,7 @@ const CategoriesBarChart = ({ className, ...rest }: { className?: string }) => {
           Overview
         </Button>
       </Box>
-    </Card>
+    </StyledCard>
   );
 };
 

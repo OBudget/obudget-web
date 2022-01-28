@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import { Formik, Form, Field } from "formik";
 import {
   Box,
@@ -12,25 +13,29 @@ import {
   MenuItem,
   Grid,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import { Select, SimpleFileUpload } from "formik-material-ui";
 
-const useStyles = makeStyles({
-  root: {},
-  formControl: {
+const PREFIX = "DataImport";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  formControl: `${PREFIX}-formControl`,
+};
+
+const StyledFormik = styled(Formik)({
+  [`& .${classes.root}`]: {},
+  [`& .${classes.formControl}`]: {
     minWidth: 120,
   },
 });
 
 const DataImport = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
-
   const handleSubmit = (values: any) => {
     console.log(values.provider);
   };
 
   return (
-    <Formik
+    <StyledFormik
       initialValues={{}}
       onSubmit={(values) => {
         handleSubmit(values);
@@ -84,7 +89,7 @@ const DataImport = ({ className, ...rest }: { className?: string }) => {
           </Box>
         </Card>
       </Form>
-    </Formik>
+    </StyledFormik>
   );
 };
 

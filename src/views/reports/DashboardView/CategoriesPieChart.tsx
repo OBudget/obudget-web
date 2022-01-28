@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import { Doughnut } from "react-chartjs-2";
 import {
   Box,
@@ -10,16 +11,19 @@ import {
   useTheme,
 } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
+const PREFIX = "CategoriesPieChart";
 
-const useStyles = makeStyles(() => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledCard = styled(Card)(() => ({
+  [`&.${classes.root}`]: {
     height: "100%",
   },
 }));
 
 const CategoriesPieChart = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
   const theme = useTheme();
 
   const data = {
@@ -74,7 +78,7 @@ const CategoriesPieChart = ({ className, ...rest }: { className?: string }) => {
   };
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardHeader title="Categories" />
       <Divider />
       <CardContent>
@@ -82,7 +86,7 @@ const CategoriesPieChart = ({ className, ...rest }: { className?: string }) => {
           <Doughnut data={data} options={options} />
         </Box>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 };
 

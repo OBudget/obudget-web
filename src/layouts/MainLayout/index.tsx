@@ -1,27 +1,39 @@
 import { Outlet } from "react-router-dom";
-import makeStyles from "@mui/styles/makeStyles";
+import { styled } from "@mui/material/styles";
 import TopBar from "./TopBar";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "MainLayout";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  wrapper: `${PREFIX}-wrapper`,
+  contentContainer: `${PREFIX}-contentContainer`,
+  content: `${PREFIX}-content`,
+};
+
+const Root = styled("div")(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     display: "flex",
     height: "100%",
     overflow: "hidden",
     width: "100%",
   },
-  wrapper: {
+
+  [`& .${classes.wrapper}`]: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
     paddingTop: 64,
   },
-  contentContainer: {
+
+  [`& .${classes.contentContainer}`]: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
   },
-  content: {
+
+  [`& .${classes.content}`]: {
     flex: "1 1 auto",
     height: "100%",
     overflow: "auto",
@@ -29,10 +41,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MainLayout = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <Root className={classes.root}>
       <TopBar />
       <div className={classes.wrapper}>
         <div className={classes.contentContainer}>
@@ -41,7 +51,7 @@ const MainLayout = () => {
           </div>
         </div>
       </div>
-    </div>
+    </Root>
   );
 };
 

@@ -1,15 +1,23 @@
 import { Box, Container, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { styled } from "@mui/material/styles";
 import Page from "src/components/Page";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "NotFoundView";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  image: `${PREFIX}-image`,
+};
+
+const StyledPage = styled(Page)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     height: "100%",
     paddingBottom: theme.spacing(3),
     paddingTop: theme.spacing(3),
   },
-  image: {
+
+  [`& .${classes.image}`]: {
     marginTop: 50,
     display: "inline-block",
     maxWidth: "100%",
@@ -18,10 +26,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const NotFoundView = () => {
-  const classes = useStyles();
-
   return (
-    <Page className={classes.root} title="404">
+    <StyledPage className={classes.root} title="404">
       <Box
         display="flex"
         flexDirection="column"
@@ -45,7 +51,7 @@ const NotFoundView = () => {
           </Box>
         </Container>
       </Box>
-    </Page>
+    </StyledPage>
   );
 };
 

@@ -1,4 +1,5 @@
 import clsx from "clsx";
+import { styled } from "@mui/material/styles";
 import {
   Avatar,
   Box,
@@ -9,14 +10,21 @@ import {
   Typography,
   colors,
 } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 import TrackChangesIcon from "@mui/icons-material/TrackChanges";
 
-const useStyles = makeStyles(() => ({
-  root: {
+const PREFIX = "FinishProgress";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  avatar: `${PREFIX}-avatar`,
+};
+
+const StyledCard = styled(Card)(() => ({
+  [`&.${classes.root}`]: {
     height: "100%",
   },
-  avatar: {
+
+  [`& .${classes.avatar}`]: {
     backgroundColor: colors.orange[600],
     height: 56,
     width: 56,
@@ -24,10 +32,8 @@ const useStyles = makeStyles(() => ({
 }));
 
 const FinishProgress = ({ className, ...rest }: { className?: string }) => {
-  const classes = useStyles();
-
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <CardContent>
         <Grid container justifyContent="space-between" spacing={3}>
           <Grid item>
@@ -48,7 +54,7 @@ const FinishProgress = ({ className, ...rest }: { className?: string }) => {
           <LinearProgress value={75.5} variant="determinate" />
         </Box>
       </CardContent>
-    </Card>
+    </StyledCard>
   );
 };
 

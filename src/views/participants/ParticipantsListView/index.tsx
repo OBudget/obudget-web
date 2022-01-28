@@ -1,8 +1,7 @@
 import { observer } from "mobx-react-lite";
+import { styled } from "@mui/material/styles";
 import { useState } from "react";
 import { Box, Container } from "@mui/material";
-
-import makeStyles from "@mui/styles/makeStyles";
 
 import Page from "src/components/Page";
 import ParticipantsStore from "src/stores/ParticipantsStore";
@@ -11,10 +10,14 @@ import ParticipantDialog from "./ParticipantDialog";
 import Participants from "./Participants";
 import Toolbar from "./Toolbar";
 
-const participantsStore = new ParticipantsStore();
+const PREFIX = "ParticipantsListView";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledPage = styled(Page)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     minHeight: "100%",
     paddingBottom: theme.spacing(3),
@@ -22,10 +25,11 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const participantsStore = new ParticipantsStore();
+
 const ParticipantsListView = observer((): JSX.Element => {
   const { participants } = participantsStore;
 
-  const classes = useStyles();
   const [searchFilter, setSearchFilter] = useState("");
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedParticipant, setSelectedParticipant] = useState<
@@ -89,7 +93,7 @@ const ParticipantsListView = observer((): JSX.Element => {
   };
 
   return (
-    <Page className={classes.root} title="Participants">
+    <StyledPage className={classes.root} title="Participants">
       <Container maxWidth={false}>
         <ParticipantDialog
           open={openDialog}
@@ -108,7 +112,7 @@ const ParticipantsListView = observer((): JSX.Element => {
           />
         </Box>
       </Container>
-    </Page>
+    </StyledPage>
   );
 });
 

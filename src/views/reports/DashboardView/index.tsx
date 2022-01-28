@@ -1,5 +1,5 @@
 import { Container, Grid } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { styled } from "@mui/material/styles";
 import Page from "src/components/Page";
 import CategoriesBarChart from "./CategoriesBarChart";
 import CategoriesPieChart from "./CategoriesPieChart";
@@ -9,8 +9,14 @@ import LatestProducts from "./LatestProducts";
 import TotalParticipants from "./TotalParticipants";
 import TotalProfit from "./TotalProfit";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "Dashboard";
+
+const classes = {
+  root: `${PREFIX}-root`,
+};
+
+const StyledPage = styled(Page)(({ theme }) => ({
+  [`&.${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     minHeight: "100%",
     paddingBottom: theme.spacing(3),
@@ -19,10 +25,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Dashboard = () => {
-  const classes = useStyles();
-
   return (
-    <Page className={classes.root} title="Dashboard">
+    <StyledPage className={classes.root} title="Dashboard">
       <Container maxWidth={false}>
         <Grid container spacing={3}>
           <Grid item lg={4} sm={6} xl={4} xs={12}>
@@ -48,7 +52,7 @@ const Dashboard = () => {
           </Grid>
         </Grid>
       </Container>
-    </Page>
+    </StyledPage>
   );
 };
 

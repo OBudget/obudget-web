@@ -1,22 +1,32 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { observer } from "mobx-react-lite";
-import makeStyles from "@mui/styles/makeStyles";
 
 import { UserStore } from "src/stores";
 
 import NavBar from "./NavBar";
 import TopBar from "./TopBar";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
+const PREFIX = "DashboardLayout";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  wrapper: `${PREFIX}-wrapper`,
+  contentContainer: `${PREFIX}-contentContainer`,
+  content: `${PREFIX}-content`,
+};
+
+const StyledNavigate = styled(Navigate)(({ theme }) => ({
+  [`& .${classes.root}`]: {
     backgroundColor: theme.palette.background.default,
     display: "flex",
     height: "100%",
     overflow: "hidden",
     width: "100%",
   },
-  wrapper: {
+
+  [`& .${classes.wrapper}`]: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
@@ -25,12 +35,14 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: 256,
     },
   },
-  contentContainer: {
+
+  [`& .${classes.contentContainer}`]: {
     display: "flex",
     flex: "1 1 auto",
     overflow: "hidden",
   },
-  content: {
+
+  [`& .${classes.content}`]: {
     flex: "1 1 auto",
     height: "100%",
     overflow: "auto",
@@ -39,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
 
 const DashboardLayout = observer(
   ({ user }: { user: UserStore }): JSX.Element => {
-    const classes = useStyles();
     const [isMobileNavOpen, setMobileNavOpen] = useState(false);
     const location = useLocation();
 
@@ -61,7 +72,7 @@ const DashboardLayout = observer(
         </div>
       </div>
     ) : (
-      <Navigate to="/login" state={{ from: location }} replace />
+      <StyledNavigate to="/login" state={{ from: location }} replace />
     );
   }
 );

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { styled } from "@mui/material/styles";
 import clsx from "clsx";
 import moment from "moment";
 import {
@@ -13,15 +14,21 @@ import {
   TableRow,
 } from "@mui/material";
 
-import makeStyles from "@mui/styles/makeStyles";
-
 import EditIcon from "@mui/icons-material/Edit";
 
 import { Participant } from "src/types";
 
-const useStyles = makeStyles((theme) => ({
-  root: {},
-  avatar: {
+const PREFIX = "Participants";
+
+const classes = {
+  root: `${PREFIX}-root`,
+  avatar: `${PREFIX}-avatar`,
+};
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  [`&.${classes.root}`]: {},
+
+  [`& .${classes.avatar}`]: {
     marginRight: theme.spacing(2),
   },
 }));
@@ -38,7 +45,6 @@ const Participants = ({
   onParticipantEdit,
   ...rest
 }: ResultsType): JSX.Element => {
-  const classes = useStyles();
   const [limit, setLimit] = useState(10);
   const [page, setPage] = useState(0);
 
@@ -51,7 +57,7 @@ const Participants = ({
   };
 
   return (
-    <Card className={clsx(classes.root, className)} {...rest}>
+    <StyledCard className={clsx(classes.root, className)} {...rest}>
       <Box>
         <Table>
           <TableHead>
@@ -99,7 +105,7 @@ const Participants = ({
         rowsPerPage={limit}
         rowsPerPageOptions={[5, 10, 25]}
       />
-    </Card>
+    </StyledCard>
   );
 };
 
