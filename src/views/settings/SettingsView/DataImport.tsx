@@ -46,7 +46,12 @@ const DataImport = ({ className, ...rest }: { className?: string }) => {
           <CardContent>
             <Grid container spacing={1}>
               <Grid item xs={12} md={8}>
-                <FormControl fullWidth required className={classes.formControl}>
+                <FormControl
+                  fullWidth
+                  required
+                  className={classes.formControl}
+                  variant="standard"
+                >
                   <InputLabel id="select-import-label">Import from</InputLabel>
                   <Field
                     component={Select}
