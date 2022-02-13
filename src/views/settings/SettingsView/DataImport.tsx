@@ -21,7 +21,15 @@ interface DataImportProps {
 
 const DataImport = observer(({ user, className, ...rest }: DataImportProps) => {
   const handleSubmit = (values: any) => {
-    user.budget.import(values);
+    user.budget
+      .import(values)
+      .then(() => {
+        console.log("success?");
+      })
+      .catch((e) => {
+        console.log(e);
+        // setErrorMessage("Login failed! Try different username/password.");
+      });
   };
 
   return (

@@ -1,3 +1,4 @@
+import axios from "axios";
 import { makeAutoObservable } from "mobx";
 
 import { FetchStatus } from "src/types";
@@ -13,12 +14,29 @@ export default class BudgetStore {
     this.user = store;
   }
 
-  import({ provider, file }: { provider: string; file: File }) {
+  async import({ provider, file }: { provider: string; file: File }) {
     this.state = FetchStatus.Pending;
 
-    console.log(file);
-    console.log(provider);
+    try {
+      const fileData = new FormData();
+      fileData.append("file", file);
 
-    this.state = FetchStatus.Done;
+      await axios.post(
+        `${process.env.REACT_APP_API_URL}/budget/import/${provider}`,
+        fileData,
+        {
+          headers: {
+            Authorization: `Bearer ${this.user.accessToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      this.state = FetchStatus.Done;
+      return await Promise.resolve({});
+    } catch (error) {
+      this.state = FetchStatus.Error;
+      return Promise.reject(error);
+    }
   }
 }
